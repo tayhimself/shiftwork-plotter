@@ -1,0 +1,89 @@
+<html>
+
+<head>
+  <style>
+    path {
+      stroke: steelblue;
+      stroke-width: 3;
+      fill: none;
+    }
+
+    .axis {
+      shape-rendering: crispEdges;
+    }
+
+    .x.axis line {
+      stroke: #000;
+    }
+
+    .x.axis .minor {
+      stroke-opacity: .5;
+    }
+
+    .x.axis line,
+    .x.axis path {
+      fill: none;
+      stroke: #000;
+    }
+
+    .y.axis path {
+      fill: none;
+      stroke: #000;
+    }
+
+    .bar {
+      fill: steelblue;
+    }
+
+    .line {
+      fill: none;
+      stroke: steelblue;
+      stroke-width: 2px;
+    }
+
+    .grid line {
+      stroke: lightgrey;
+      stroke-opacity: 0.7;
+      shape-rendering: crispEdges;
+    }
+
+    .grid path {
+      stroke-width: 0;
+    }
+
+    rect.shift {
+      fill: yellowgreen;
+      fill-opacity: 0.6;
+    }
+    rect.sleep {
+      fill: steelblue;
+      fill-opacity: 0.6;
+    }
+  </style>
+  <title>D3.js Demo</title>
+</head>
+
+<body>
+  <h1>Sleep Plotter Shiftwork Studies</h1>
+  <section style="padding:5%">
+    <div id="select-subject" class="flex row">
+      Subject:
+    </div>
+    <div id="shift-duration">
+      Shift Duration:
+      <select>
+        <option value="12">12</option>
+        <option value="8">8</option>
+        <option value="10">10</option>
+      </select>
+    </div>
+  </section>
+  <div id="chart"></div>
+
+  <script type="text/javascript" src="./node_modules/d3/dist/d3.min.js"></script>
+
+  <script type="module" defer src="plotter.js"></script>
+
+</body>
+
+</html>

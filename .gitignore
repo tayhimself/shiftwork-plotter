@@ -1,0 +1,4 @@
+node_modules/
+.modules.yaml
+.DS_Store
+diary.json
