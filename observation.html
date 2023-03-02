@@ -1,6 +1,7 @@
 <html>
 
 <head>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.9.4/css/bulma.min.css" integrity="sha512-HqxHUkJM0SYcbvxUw5P60SzdOTy/QVwA1JJrvaXJv4q7lmbDZCmZaqz01UPOaQveoxfYRv1tHozWGPMcuTBuvQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
   <style>
     path {
       stroke: steelblue;
@@ -60,22 +61,25 @@
       fill-opacity: 0.6;
     }
   </style>
-  <title>D3.js Demo</title>
+  <title>Shiftwork Raster Plot</title>
 </head>
 
 <body>
-  <h1>Sleep Plotter Shiftwork Studies</h1>
-  <section style="padding:5%">
-    <div id="select-subject" class="flex row">
+  <h1 class="is-size-3 has-text-centered">Sleep Plotter Shiftwork</h1>
+  <section style="padding:5%;display:flex; flex-direction:column;" >
+    <div style="display:flex; flex-direction:row" class="my-1">
       Subject:
+      <div id="select-subject" class="select mx-5">   </div>
     </div>
-    <div id="shift-duration">
+    <div id="shift-duration" style="display:flex; flex-direction:row" class="my-1">
       Shift Duration:
-      <select>
-        <option value="12">12</option>
-        <option value="8">8</option>
-        <option value="10">10</option>
-      </select>
+      <div class="select mx-5">
+        <select>
+          <option value="12">12</option>
+          <option value="8">8</option>
+          <option value="10">10</option>
+        </select>
+      </div>
     </div>
   </section>
   <div id="chart"></div>

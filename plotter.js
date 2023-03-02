@@ -75,15 +75,13 @@ function plotChart(subject, shiftDuration) {
   // Legend to be drawn on the right side of the plot
   const legendWidth = 120
 
-  const margin = { top: 25, right: 10, bottom: 25, left: 100 }
+  const margin = { top: 50, right: 10, bottom: 25, left: 100 }
   const maxwidth = document.getElementById("chart").clientWidth - margin.left - margin.right - legendWidth
   const width = maxwidth > 2000 ? 2000 : maxwidth
-
   const desiredHeight = (1 - 1 / numDays) * width
   const maxHeight = window.innerHeight - margin.top - margin.bottom - 50
   const height = desiredHeight > maxHeight ? maxHeight : desiredHeight
-  const fontSize = width < 600 ? "0.8rem" : "1rem"
-  const largeFontSize = width < 600 ? "1.25rem" : "1.5rem"
+  const fontSize = width < 600 ? "0.7rem" : "0.8rem"
 
   d3.selectAll("#chart > *").remove()
 
@@ -108,8 +106,8 @@ function plotChart(subject, shiftDuration) {
       )
       .call((g) => g.attr("transform", `translate(0,${margin.top})`))
       .call((g) => g.selectAll(".domain").remove())
-      .call((g) => g.selectAll(".tick line").attr("stroke", "#fff").attr("stroke-width",1).attr())
-      .call((g) => g.selectAll(".tick line").attr("y2", height-margin.bottom))
+      .call((g) => g.selectAll(".tick line").attr("stroke", "#fff").attr("stroke-width",1).attr("y2", height-margin.bottom))
+      .call((g) => g.selectAll(".tick text").attr("transform", "rotate(-45)").attr("text-anchor", "start").attr("x", 4))
 
   let y = d3
     .scaleTime()
@@ -118,9 +116,9 @@ function plotChart(subject, shiftDuration) {
 
   const yAxis = (g) =>
     g
-      .call(d3.axisLeft(y).tickFormat(d3.timeFormat("%Y-%m-%d")))
-      .call((g) => g.attr("transform", `translate(0,${margin.top - 15})`))
-      .call((g) => g.selectAll(".tick text").attr("text-anchor", "start").attr("x", 4).attr("font-size", fontSize))
+      .call(d3.axisLeft(y).tickFormat(d3.timeFormat("%Y-%m-%d")).ticks(uniqueDays.size))
+      .call((g) => g.attr("transform", "translate(0,12.5)"))
+      .call((g) => g.selectAll(".tick text").attr("text-anchor", "start").attr("x", 4)).attr("font-size", fontSize)
 
   let svg = d3
     .select("#chart")
@@ -145,10 +143,11 @@ function plotChart(subject, shiftDuration) {
     .attr("x", ([start]) => x(hours(start)))
     .attr("width", ([start, end]) => x(hours(end) || 24) - x(hours(start)))
     .attr("y", ([start]) => y(d3.timeDay(start)))
-    .attr("height", Math.floor((height-margin.top-margin.bottom) / (numDays + 10)) )
+    .attr("height", Math.ceil((height-margin.top-margin.bottom) / (numDays + 10)) )
     .attr("class", ([, , type]) => type)
   svg.append("g").attr("pointer-events", "none").call(yAxis)
   svg.append("g").attr("pointer-events", "none").call(xAxis)
+
   return svg
 }
 
